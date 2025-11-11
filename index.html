@@ -7,79 +7,130 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+        :root {
+            color-scheme: dark;
+            --bg-primary: #050816;
+            --bg-secondary: rgba(15, 23, 42, 0.65);
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5f5;
+            --accent: #6366f1;
+            --accent-strong: #a855f7;
+            --accent-glow: rgba(99, 102, 241, 0.45);
+            --border-soft: rgba(148, 163, 184, 0.2);
+            --card-shadow: 0 25px 50px -12px rgba(99, 102, 241, 0.25);
+        }
         body {
             font-family: 'Noto Sans KR', sans-serif;
-            background-color: #f8f8f8;
-            color: #333;
+            background: radial-gradient(circle at top, rgba(99, 102, 241, 0.15), transparent 45%), radial-gradient(circle at bottom, rgba(15, 23, 42, 0.75), #020617);
+            color: var(--text-primary);
         }
         .container {
-            max-width: 1000px;
+            max-width: 1080px;
         }
         .section-title {
             position: relative;
-            padding-bottom: 10px;
-            margin-bottom: 30px;
-            font-size: 2.25rem; /* text-4xl */
-            font-weight: 700; /* font-bold */
-            color: #2c3e50;
+            padding-bottom: 12px;
+            margin-bottom: 36px;
+            font-size: 2.35rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -0.01em;
         }
         .section-title::after {
             content: '';
             position: absolute;
             left: 0;
             bottom: 0;
-            width: 60px;
+            width: 72px;
             height: 4px;
-            background-color: #3498db;
-            border-radius: 2px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-strong));
+            box-shadow: 0 0 20px var(--accent-glow);
+            border-radius: 999px;
         }
         .card {
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            padding: 2rem;
-            transition: all 0.3s ease;
+            position: relative;
+            background: linear-gradient(135deg, rgba(10, 12, 29, 0.92), rgba(30, 41, 59, 0.78));
+            border-radius: 18px;
+            box-shadow: var(--card-shadow);
+            padding: 2.25rem;
+            border: 1px solid var(--border-soft);
+            backdrop-filter: blur(16px);
+            transition: transform 0.4s ease, box-shadow 0.4s ease, border 0.4s ease;
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            inset: 1px;
+            border-radius: 16px;
+            border: 1px solid rgba(148, 163, 184, 0.15);
+            pointer-events: none;
         }
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 35px 60px -24px rgba(79, 70, 229, 0.55);
+            border-color: rgba(129, 140, 248, 0.6);
+        }
+        .card h3 {
+            color: var(--text-primary);
+        }
+        .card p,
+        .card li {
+            color: var(--text-secondary);
         }
         .skill-badge {
-            display: inline-block;
-            background-color: #eaf2f8;
-            color: #2c3e50;
-            padding: 0.4rem 0.9rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: linear-gradient(145deg, rgba(79, 70, 229, 0.2), rgba(14, 165, 233, 0.2));
+            color: var(--text-primary);
+            padding: 0.45rem 1rem;
+            border-radius: 999px;
+            font-size: 0.92rem;
             font-weight: 500;
-            margin-right: 8px;
-            margin-bottom: 8px;
-            transition: background-color 0.3s ease;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            border: 1px solid rgba(99, 102, 241, 0.35);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
         }
         .skill-badge:hover {
-            background-color: #d4e6f1;
+            border-color: rgba(129, 140, 248, 0.75);
+            box-shadow: 0 0 25px rgba(79, 70, 229, 0.35);
+            transform: translateY(-2px);
         }
         .grid-header {
             font-weight: 700;
-            color: #2c3e50;
-            background-color: #ecf0f1;
-            padding: 0.75rem 1rem;
-            border-bottom: 1px solid #ddd;
+            color: var(--text-primary);
+            background: rgba(15, 23, 42, 0.72);
+            padding: 0.9rem 1.1rem;
+            border-bottom: 1px solid var(--border-soft);
         }
         .grid-item {
-            padding: 0.75rem 1rem;
-            border-bottom: 1px solid #eee;
+            padding: 0.9rem 1.1rem;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+            color: var(--text-secondary);
+            background: rgba(15, 23, 42, 0.35);
+        }
+        .grid-item:nth-child(even) {
+            background: rgba(30, 41, 59, 0.35);
         }
         .grid-item:last-child {
             border-bottom: none;
         }
-        /* Animation for hero section - placeholder for actual JS/CSS animations */
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(26px); }
             to { opacity: 1; transform: translateY(0); }
         }
         .animate-fadeIn {
             animation: fadeIn 1s ease-out forwards;
+        }
+        .accent-blur {
+            position: absolute;
+            inset: auto auto -120px -80px;
+            width: 320px;
+            height: 320px;
+            background: radial-gradient(circle, rgba(79, 70, 229, 0.35), transparent 70%);
+            filter: blur(65px);
+            z-index: -1;
         }
         .strikethrough-text {
             position: relative;
@@ -92,48 +143,87 @@
             left: 0;
             width: 100%;
             height: 2px;
-            background-color: #e74c3c; /* 빨간색 취소선 */
+            background: linear-gradient(90deg, rgba(239, 68, 68, 0.8), rgba(249, 115, 22, 0.8));
             transform: translateY(-50%);
+        }
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.55);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 18px;
+            padding: 2.5rem;
+            box-shadow: 0 30px 60px -20px rgba(30, 64, 175, 0.45);
+            backdrop-filter: blur(20px);
+        }
+        .pdf-viewer {
+            width: 100%;
+            height: min(80vh, 720px);
+            border: 1px solid var(--border-soft);
+            border-radius: 18px;
+            background: rgba(15, 23, 42, 0.65);
+            box-shadow: 0 30px 60px -24px rgba(79, 70, 229, 0.45);
+        }
+        .pdf-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0.65rem 1.25rem;
+            border-radius: 999px;
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.25), rgba(168, 85, 247, 0.35));
+            border: 1px solid rgba(129, 140, 248, 0.45);
+            color: var(--text-primary);
+            font-weight: 500;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .pdf-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px -24px rgba(99, 102, 241, 0.6);
+        }
+        .muted-text {
+            color: var(--text-secondary);
+        }
+        a {
+            color: var(--accent-strong);
         }
     </style>
 </head>
-<body class="leading-relaxed">
-    <header class="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-20 px-4 shadow-lg">
-        <div class="container mx-auto text-center animate-fadeIn">
-            <h1 class="text-5xl md:text-6xl font-extrabold mb-4">muuvi</h1>
-            <p class="text-2xl md:text-3xl font-light mb-6">"지금 기분에 맞는 콘텐츠를, AI가 당신 대신 찾아드릴게요."</p>
-            <p class="text-lg md:text-xl opacity-90">OpenAI 임베딩과 Supabase 벡터 검색을 활용한 감정 기반 AI 큐레이션 플랫폼</p>
+<body class="leading-relaxed relative">
+    <header class="relative overflow-hidden bg-gradient-to-br from-indigo-950 via-slate-950 to-black text-white py-24 px-4 shadow-2xl">
+        <div class="accent-blur"></div>
+        <div class="container mx-auto text-center animate-fadeIn relative z-10">
+            <h1 class="text-5xl md:text-6xl font-extrabold mb-4 tracking-tight">muuvi</h1>
+            <p class="text-2xl md:text-3xl font-light mb-6 text-indigo-200">"지금 기분에 맞는 콘텐츠를, AI가 당신 대신 찾아드릴게요."</p>
+            <p class="text-lg md:text-xl text-slate-200/80">OpenAI 임베딩과 Supabase 벡터 검색을 활용한 감정 기반 AI 큐레이션 플랫폼</p>
         </div>
     </header>
 
-    <main class="container mx-auto py-16 px-4">
+    <main class="container mx-auto py-20 px-4 space-y-20 relative">
         <!-- 프로젝트 개요 --><section class="mb-16">
-            <h2 class="section-title">🎬 프로젝트 개요</h2>
+            <h2 class="section-title"> 프로젝트 개요</h2>
             <div class="grid md:grid-cols-2 gap-8">
                 <div class="card">
-                    <h3 class="text-2xl font-semibold text-blue-700 mb-3">🏷 프로젝트명</h3>
-                    <p class="text-xl">muuvi – 감정 기반 콘텐츠 추천 플랫폼</p>
+                    <h3 class="text-2xl font-semibold text-indigo-300 mb-3">🏷 프로젝트명</h3>
+                    <p class="text-xl muted-text">muuvi – 감정 기반 콘텐츠 추천 플랫폼</p>
                 </div>
                 <div class="card">
-                    <h3 class="text-2xl font-semibold text-blue-700 mb-3">💡 한 줄 소개</h3>
-                    <p class="text-xl">OpenAI 임베딩과 Supabase 벡터 검색을 활용해, 사용자의 감정과 장르 조합에 따라 콘텐츠를 추천하는 감정형 AI 큐레이션 플랫폼.</p>
+                    <h3 class="text-2xl font-semibold text-indigo-300 mb-3">💡 한 줄 소개</h3>
+                    <p class="text-xl muted-text">OpenAI 임베딩과 Supabase 벡터 검색을 활용해, 사용자의 감정과 장르 조합에 따라 콘텐츠를 추천하는 감정형 AI 큐레이션 플랫폼.</p>
                 </div>
             </div>
         </section>
 
         <!-- 기획 배경 --><section class="mb-16">
-            <h2 class="section-title">🧭 기획 배경</h2>
+            <h2 class="section-title"> 기획 배경</h2>
             <div class="grid md:grid-cols-2 gap-8">
                 <div class="card">
-                    <h3 class="text-2xl font-semibold text-blue-700 mb-3">📌 문제 인식</h3>
-                    <ul class="list-disc pl-5 text-lg space-y-2">
+                    <h3 class="text-2xl font-semibold text-indigo-300 mb-3">📌 문제 인식</h3>
+                    <ul class="list-disc pl-5 text-lg space-y-2 text-slate-200/80">
                         <li>OTT 플랫폼이 너무 많아, “뭘 볼지 고르기”가 피로감의 원인이 됨.</li>
                         <li>기존 추천 시스템은 장르 중심이라 사용자의 ‘감정적 맥락’을 반영하지 못함.</li>
                     </ul>
                 </div>
                 <div class="card">
-                    <h3 class="text-2xl font-semibold text-blue-700 mb-3">💭 인사이트</h3>
-                    <ul class="list-disc pl-5 text-lg space-y-2">
+                    <h3 class="text-2xl font-semibold text-indigo-300 mb-3">💭 인사이트</h3>
+                    <ul class="list-disc pl-5 text-lg space-y-2 text-slate-200/80">
                         <li>실제 시청자는 “오늘 기분에 맞는 콘텐츠”를 찾고 싶어 함.</li>
                         <li>따라서, 무드(Mood) + 장르(Genre) 조합을 통해 감정 기반 추천 경험을 제공.</li>
                     </ul>
@@ -142,129 +232,107 @@
         </section>
 
         <!-- 핵심 기능 --><section class="mb-16">
-            <h2 class="section-title">🚀 핵심 기능</h2>
+            <h2 class="section-title"> 핵심 기능</h2>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div class="card">
-                    <h3 class="text-xl font-semibold text-blue-700 mb-2">🎨 온보딩 플로우 (Recoil 기반)</h3>
-                    <p class="text-base text-gray-700">사용자가 ‘장르(영화/애니/드라마)’와 ‘무드(힐링/몰입/짜릿 등)’를 단계별로 선택하면, Recoil atom을 통해 전역 상태로 저장</p>
+                    <h3 class="text-xl font-semibold text-indigo-300 mb-2">🎨 온보딩 플로우 (Recoil 기반)</h3>
+                    <p class="text-base text-slate-300/90">사용자가 ‘장르(영화/애니/드라마)’와 ‘무드(힐링/몰입/짜릿 등)’를 단계별로 선택하면, Recoil atom을 통해 전역 상태로 저장</p>
                 </div>
                 <div class="card">
-                    <h3 class="text-xl font-semibold text-blue-700 mb-2">🧠 AI 시맨틱 추천 (OpenAI + Supabase 벡터 검색)</h3>
-                    <p class="text-base text-gray-700">사용자의 무드/장르 조합을 OpenAI 임베딩으로 변환 후, Supabase(pgvector)에서 유사도 기반 검색 수행</p>
+                    <h3 class="text-xl font-semibold text-indigo-300 mb-2">🧠 AI 시맨틱 추천 (OpenAI + Supabase 벡터 검색)</h3>
+                    <p class="text-base text-slate-300/90">사용자의 무드/장르 조합을 OpenAI 임베딩으로 변환 후, Supabase(pgvector)에서 유사도 기반 검색 수행</p>
                 </div>
                 <div class="card">
-                    <h3 class="text-xl font-semibold text-blue-700 mb-2">🎥 TMDB 연동 데이터 파이프라인</h3>
-                    <p class="text-base text-gray-700">Supabase Edge Function(populate-db)이 TMDB API에서 콘텐츠를 수집 및 저장</p>
+                    <h3 class="text-xl font-semibold text-indigo-300 mb-2">🎥 TMDB 연동 데이터 파이프라인</h3>
+                    <p class="text-base text-slate-300/90">Supabase Edge Function(populate-db)이 TMDB API에서 콘텐츠를 수집 및 저장</p>
                 </div>
                 <div class="card">
-                    <h3 class="text-xl font-semibold text-blue-700 mb-2">🧩 AI 임베딩 자동화 파이프라인</h3>
-                    <p class="text-base text-gray-700">TMDB로 가져온 콘텐츠 설명을 OpenAI text-embedding-3-small 모델로 벡터화 후 Supabase에 저장 (embed Function)</p>
+                    <h3 class="text-xl font-semibold text-indigo-300 mb-2">🧩 AI 임베딩 자동화 파이프라인</h3>
+                    <p class="text-base text-slate-300/90">TMDB로 가져온 콘텐츠 설명을 OpenAI text-embedding-3-small 모델로 벡터화 후 Supabase에 저장 (embed Function)</p>
                 </div>
                 <div class="card">
-                    <h3 class="text-xl font-semibold text-blue-700 mb-2">🔍 실시간 벡터 검색 기반 추천</h3>
-                    <p class="text-base text-gray-700">사용자가 입력한 감정/장르 조합을 벡터로 변환해 Supabase RPC(match_contents)로 유사 콘텐츠 검색</p>
+                    <h3 class="text-xl font-semibold text-indigo-300 mb-2">🔍 실시간 벡터 검색 기반 추천</h3>
+                    <p class="text-base text-slate-300/90">사용자가 입력한 감정/장르 조합을 벡터로 변환해 Supabase RPC(match_contents)로 유사 콘텐츠 검색</p>
                 </div>
                 <div class="card">
-                    <h3 class="text-xl font-semibold text-blue-700 mb-2">🎬 콘텐츠 카드 UI 렌더링</h3>
-                    <p class="text-base text-gray-700">TMDB 이미지, 제목, 평점, 설명을 카드 컴포넌트로 표시</p>
+                    <h3 class="text-xl font-semibold text-indigo-300 mb-2">🎬 콘텐츠 카드 UI 렌더링</h3>
+                    <p class="text-base text-slate-300/90">TMDB 이미지, 제목, 평점, 설명을 카드 컴포넌트로 표시</p>
                 </div>
                 <div class="card">
-                    <h3 class="text-xl font-semibold text-blue-700 mb-2">💾 즐겨찾기 기능 (확장 예정)</h3>
-                    <p class="text-base text-gray-700">사용자 계정 기반의 콘텐츠 저장 및 다시보기 구조 설계 완료</p>
+                    <h3 class="text-xl font-semibold text-indigo-300 mb-2">💾 즐겨찾기 기능 (확장 예정)</h3>
+                    <p class="text-base text-slate-300/90">사용자 계정 기반의 콘텐츠 저장 및 다시보기 구조 설계 완료</p>
                 </div>
             </div>
         </section>
 
         <!-- 기술 스택 --><section class="mb-16">
-            <h2 class="section-title">🧠 기술 스택</h2>
+            <h2 class="section-title"> 기술 스택</h2>
             <div class="card p-6">
                 <div class="mb-4">
-                    <h4 class="text-lg font-bold text-gray-800 mb-2">Frontend</h4>
+                    <h4 class="text-lg font-bold text-slate-200 mb-2">Frontend</h4>
                     <span class="skill-badge">React</span>
                     <span class="skill-badge">TypeScript</span>
                     <span class="skill-badge">Vite</span>
                     <span class="skill-badge">Tailwind CSS</span>
                 </div>
                 <div class="mb-4">
-                    <h4 class="text-lg font-bold text-gray-800 mb-2">State Management</h4>
+                    <h4 class="text-lg font-bold text-slate-200 mb-2">State Management</h4>
                     <span class="skill-badge">Recoil</span>
                 </div>
                 <div class="mb-4">
-                    <h4 class="text-lg font-bold text-gray-800 mb-2">Backend</h4>
+                    <h4 class="text-lg font-bold text-slate-200 mb-2">Backend</h4>
                     <span class="skill-badge">Supabase (Auth, Database, Edge Functions, pgvector)</span>
                 </div>
                 <div class="mb-4">
-                    <h4 class="text-lg font-bold text-gray-800 mb-2">AI / Embedding</h4>
+                    <h4 class="text-lg font-bold text-slate-200 mb-2">AI / Embedding</h4>
                     <span class="skill-badge">OpenAI – text-embedding-3-small</span>
                 </div>
                 <div class="mb-4">
-                    <h4 class="text-lg font-bold text-gray-800 mb-2">External API</h4>
+                    <h4 class="text-lg font-bold text-slate-200 mb-2">External API</h4>
                     <span class="skill-badge">TMDB API</span>
                 </div>
                 <div class="mb-4">
-                    <h4 class="text-lg font-bold text-gray-800 mb-2">Animation</h4>
+                    <h4 class="text-lg font-bold text-slate-200 mb-2">Animation</h4>
                     <span class="skill-badge">CSS Keyframes</span>
                 </div>
                 <div>
-                    <h4 class="text-lg font-bold text-gray-800 mb-2">Routing</h4>
+                    <h4 class="text-lg font-bold text-slate-200 mb-2">Routing</h4>
                     <span class="skill-badge">React Router</span>
                 </div>
             </div>
         </section>
 
         <!-- 시스템 아키텍처 --><section class="mb-16">
-            <h2 class="section-title">🧩 시스템 아키텍처</h2>
-            <div class="card p-6">
-                <p class="text-lg font-semibold mb-4 text-gray-800">전체 데이터 흐름:</p>
-                <ul class="list-disc pl-6 space-y-3 text-base">
-                    <li><strong class="text-blue-600">TMDB → Supabase (Edge Function: populate-db)</strong>
-                        <p>TMDB API에서 콘텐츠 데이터 수집 → DB 저장</p>
+            <h2 class="section-title"> 시스템 아키텍처</h2>
+            <div class="glass-panel">
+                <p class="text-lg font-semibold mb-4 text-slate-100/90">전체 데이터 흐름:</p>
+                <ul class="list-disc pl-6 space-y-3 text-base text-slate-300/90">
+                    <li><strong class="text-indigo-300">TMDB → Supabase (Edge Function: populate-db)</strong>
+                        <p class="muted-text">TMDB API에서 콘텐츠 데이터 수집 → DB 저장</p>
                     </li>
-                    <li><strong class="text-blue-600">Supabase → OpenAI Embedding (Edge Function: embed)</strong>
-                        <p>콘텐츠 설명을 벡터화(1536차원) 후 contents.vector 컬럼에 저장</p>
+                    <li><strong class="text-indigo-300">Supabase → OpenAI Embedding (Edge Function: embed)</strong>
+                        <p class="muted-text">콘텐츠 설명을 벡터화(1536차원) 후 contents.vector 컬럼에 저장</p>
                     </li>
-                    <li><strong class="text-blue-600">User → Onboarding Flow (Frontend)</strong>
-                        <p>사용자 장르 + 무드 선택 → Recoil 전역 상태 저장</p>
+                    <li><strong class="text-indigo-300">User → Onboarding Flow (Frontend)</strong>
+                        <p class="muted-text">사용자 장르 + 무드 선택 → Recoil 전역 상태 저장</p>
                     </li>
-                    <li><strong class="text-blue-600">Frontend → Supabase (AI 검색)</strong>
-                        <p>선택한 무드/장르를 벡터화 → Supabase RPC(match_contents) 호출</p>
+                    <li><strong class="text-indigo-300">Frontend → Supabase (AI 검색)</strong>
+                        <p class="muted-text">선택한 무드/장르를 벡터화 → Supabase RPC(match_contents) 호출</p>
                     </li>
-                    <li><strong class="text-blue-600">DB → Frontend (결과)</strong>
-                        <p>코사인 유사도 기반 상위 콘텐츠 리스트 반환 → UI로 렌더링</p>
+                    <li><strong class="text-indigo-300">DB → Frontend (결과)</strong>
+                        <p class="muted-text">코사인 유사도 기반 상위 콘텐츠 리스트 반환 → UI로 렌더링</p>
                     </li>
                 </ul>
-                <p class="mt-6 text-xl font-bold text-center text-blue-700">
+                <p class="mt-6 text-xl font-bold text-center text-indigo-200">
                     📊 결과적으로, 사용자는 “오늘 기분에 맞는 콘텐츠”를 AI 임베딩 기반으로 추천받음.
                 </p>
             </div>
         </section>
-        
-        <!-- 디자인 & UX --><section class="mb-16">
-            <h2 class="section-title">🎨 디자인 & UX</h2>
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="card">
-                    <h3 class="text-xl font-semibold text-blue-700 mb-2">💫 온보딩 UI</h3>
-                    <p class="text-base text-gray-700">카드형 단계별 선택 인터페이스 (Step1: 장르, Step2: 무드)</p>
-                </div>
-                <div class="card">
-                    <h3 class="text-xl font-semibold text-blue-700 mb-2">🎞 메인 추천 페이지</h3>
-                    <p class="text-base text-gray-700">감정 테마 컬러(무드별 색상)와 TMDB 이미지 기반 카드 UI</p>
-                </div>
-                <div class="card">
-                    <h3 class="text-xl font-semibold text-blue-700 mb-2">🌈 애니메이션 효과</h3>
-                    <p class="text-base text-gray-700">CSS Keyframes를 활용한 자연스러운 로고 팝업, 페이드인, 타이핑 애니메이션</p>
-                </div>
-                <div class="card">
-                    <h3 class="text-xl font-semibold text-blue-700 mb-2">📱 반응형 설계</h3>
-                    <p class="text-base text-gray-700">모바일–데스크톱 간 UI 최적화 완료</p>
-                </div>
-            </div>
-        </section>
 
         <!-- 코드 구조 요약 --><section class="mb-16">
-            <h2 class="section-title">🧩 코드 구조 요약</h2>
-            <div class="card p-6 bg-gray-50 overflow-x-auto">
-                <pre class="text-sm text-gray-800 whitespace-pre-wrap"><code class="language-bash">
+            <h2 class="section-title">코드 구조 요약</h2>
+            <div class="card p-6 bg-white/5 backdrop-blur overflow-x-auto">
+                <pre class="text-sm text-slate-100 whitespace-pre-wrap"><code class="language-bash">
 src/
  ┣ pages/
  ┃ ┣ Onboarding/
@@ -274,78 +342,76 @@ src/
  ┃ ┗ Main/
  ┃   ┗ index.tsx
  ┣ recoil/
- ┃ ┗ userState.ts  <span class="text-gray-500">← Recoil atom 정의</span>
+ ┃ ┗ userState.ts  <span class="text-slate-400">← Recoil atom 정의</span>
  ┣ lib/
  ┃ ┣ supabase/
- ┃ ┃ ┣ recommendations.ts  <span class="text-gray-500">← AI 벡터 검색 요청 로직</span>
- ┃ ┗ imdb/fetchContent.ts  <span class="text-gray-500">← TMDB → Supabase 데이터 전송</span>
- ┗ index.css <span class="text-gray-500">← CSS Keyframes 기반 애니메이션 정의</span>
+ ┃ ┃ ┣ recommendations.ts  <span class="text-slate-400">← AI 벡터 검색 요청 로직</span>
+ ┃ ┗ imdb/fetchContent.ts  <span class="text-slate-400">← TMDB → Supabase 데이터 전송</span>
+ ┗ index.css <span class="text-slate-400">← CSS Keyframes 기반 애니메이션 정의</span>
 
 supabase/
  ┗ functions/
-   ┣ populate-db/ <span class="text-gray-500">← TMDB → DB 데이터 파이프라인</span>
-   ┗ embed/ <span class="text-gray-500">← OpenAI 임베딩 함수 (AI 벡터화)</span>
+  ┣ populate-db/ <span class="text-slate-400">← TMDB → DB 데이터 파이프라인</span>
+  ┗ embed/ <span class="text-slate-400">← OpenAI 임베딩 함수 (AI 벡터화)</span>
                 </code></pre>
             </div>
         </section>
 
         <!-- 결과 및 성과 --><section class="mb-16">
-            <h2 class="section-title">📈 결과 및 성과</h2>
+            <h2 class="section-title">결과 및 성과</h2>
             <div class="card p-6">
-                <ul class="list-disc pl-6 text-lg space-y-2 text-gray-700">
-                    <li><strong class="text-blue-600">TMDB 데이터 자동 임베딩 파이프라인 구축</strong></li>
-                    <li><strong class="text-blue-600">OpenAI + Supabase 벡터 기반 추천 알고리즘 완성</strong></li>
-                    <li><strong class="text-blue-600">Recoil 기반 온보딩 UX로 사용자 흐름 정제</strong></li>
-                    <li><strong class="text-blue-600">100% 프론트-백엔드 통합형 AI 큐레이션 시스템</strong></li>
+                <ul class="list-disc pl-6 text-lg space-y-2 text-slate-300/90">
+                    <li><strong class="text-indigo-300">TMDB 데이터 자동 임베딩 파이프라인 구축</strong></li>
+                    <li><strong class="text-indigo-300">OpenAI + Supabase 벡터 기반 추천 알고리즘 완성</strong></li>
+                    <li><strong class="text-indigo-300">Recoil 기반 온보딩 UX로 사용자 흐름 정제</strong></li>
+                    <li><strong class="text-indigo-300">100% 프론트-백엔드 통합형 AI 큐레이션 시스템</strong></li>
                 </ul>
             </div>
         </section>
 
         <!-- 향후 계획 --><section class="mb-16">
-            <h2 class="section-title">📅 향후 계획</h2>
+            <h2 class="section-title">향후 계획</h2>
             <div class="card p-6">
-                <ul class="list-disc pl-6 text-lg space-y-2 text-gray-700">
-                    <li><strong class="text-blue-600">개인화 추천</strong> (사용자 선호 학습 + 피드백 반영)</li>
-                    <li><strong class="text-blue-600">유저 로그인 기반 “My Mood Playlist”</strong> 기능</li>
-                    <li><strong class="text-blue-600">AI 감정 분석 기반 자동 무드 예측</strong> 기능 (텍스트 감정 → 콘텐츠 추천)</li>
-                    <li><strong class="text-blue-600">성능 최적화</strong> (벡터 캐싱, 클라이언트 프리페칭)</li>
+                <ul class="list-disc pl-6 text-lg space-y-2 text-slate-300/90">
+                    <li><strong class="text-indigo-300">개인화 추천</strong> (사용자 선호 학습 + 피드백 반영)</li>
+                    <li><strong class="text-indigo-300">유저 로그인 기반 “My Mood Playlist”</strong> 기능</li>
+                    <li><strong class="text-indigo-300">AI 감정 분석 기반 자동 무드 예측</strong> 기능 (텍스트 감정 → 콘텐츠 추천)</li>
+                    <li><strong class="text-indigo-300">성능 최적화</strong> (벡터 캐싱, 클라이언트 프리페칭)</li>
                 </ul>
             </div>
         </section>
 
-        <!-- 담당 역할 --><section class="mb-16">
-            <h2 class="section-title">🧑‍💻 담당 역할</h2>
-            <div class="card p-0">
-                <div class="grid grid-cols-1 md:grid-cols-2">
-                    <div class="grid-header">역할</div>
-                    <div class="grid-header">내용</div>
-                    <div class="grid-item">기획 & 설계</div>
-                    <div class="grid-item">서비스 구조, 데이터 흐름, 추천 알고리즘 설계</div>
-                    <div class="grid-item">프론트엔드 개발</div>
-                    <div class="grid-item">React UI, 온보딩 플로우, API 연동, 애니메이션</div>
-                    <div class="grid-item">백엔드 구축</div>
-                    <div class="grid-item">Supabase DB, Edge Functions(populate-db, embed), RPC 설정</div>
-                    <div class="grid-item">AI 연동</div>
-                    <div class="grid-item">OpenAI Embedding API 및 Supabase pgvector 통합</div>
+        <!-- 프로젝트 제안서 --><section class="mb-16">
+            <h2 class="section-title">📄 프로젝트 제안서</h2>
+            <div class="card space-y-6">
+                <p class="text-base text-slate-300/90">muuvi의 상세 기획과 구현 전략은 아래 PDF 제안서에서 확인할 수 있습니다.</p>
+                <iframe src="muuviProposal.pdf" class="pdf-viewer" title="muuvi 프로젝트 제안서" loading="lazy"></iframe>
+                <div>
+                    <a class="pdf-cta" href="muuviProposal.pdf" target="_blank" rel="noopener noreferrer">새 탭에서 제안서 열기</a>
                 </div>
             </div>
         </section>
 
-        <!-- 마무리 문구 --><section class="text-center py-12 bg-blue-50 rounded-lg shadow-inner">
-            <h2 class="text-3xl md:text-4xl font-bold text-blue-800 mb-4">✨ 마무리</h2>
-            <p class="text-xl md:text-2xl text-gray-700">
+        <!-- 마무리 문구 --><section class="text-center py-12 bg-gradient-to-r from-indigo-950/80 via-slate-900/70 to-indigo-900/60 rounded-2xl border border-white/10 shadow-[0_40px_80px_-50px_rgba(79,70,229,0.7)] backdrop-blur">
+            <p class="text-xl md:text-2xl text-slate-200/90">
                 “muuvi는 당신의 감정을 이해하는 AI 큐레이터예요.
             </p>
-            <p class="text-xl md:text-2xl text-gray-700 font-bold mt-2">
+            <p class="text-xl md:text-2xl text-indigo-100 font-bold mt-2">
                 장르보다 중요한 건, 지금 당신의 기분이니까.”
             </p>
         </section>
     </main>
 
-    <footer class="bg-gray-800 text-white py-8 px-4 mt-16">
-        <div class="container mx-auto text-center">
-            <p>&copy; 2023 [도현님의 이름/회사명]. All rights reserved.</p>
-            <p class="mt-2 text-sm">Built with ❤️ for muuvi project.</p>
+    <footer class="bg-black/60 border-t border-white/10 text-slate-200 py-10 px-4 mt-16 backdrop-blur">
+        <div class="container mx-auto text-center space-y-3">
+            <p class="text-sm tracking-wide uppercase text-slate-400">&copy; 2025 muuvi. All rights reserved.</p>
+            <p class="text-sm text-slate-300">Built with ❤️ for muuvi project.</p>
+            <div class="flex justify-center gap-4 text-xs text-slate-500">
+                <span>#AI</span>
+                <span>#Recoil</span>
+                <span>#Supabase</span>
+                <span>#OpenAI</span>
+            </div>
         </div>
     </footer>
 </body>
